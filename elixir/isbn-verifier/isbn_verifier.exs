@@ -17,17 +17,23 @@ defmodule ISBNVerifier do
       isbn
       |> String.replace("-", "")
 
-    if Regex.match?(~r/[0-9]{9}[0-9X]{1}/, numbered) do
+    with true <- Regex.match?(~r/[0-9]{9}[0-9X]{1}$/, numbered) do
       numbered
       |> String.graphemes()
-      # TODO: 末尾の X を 10 に変換したリストにする
+      |> convert_last()
       |> Enum.map(&(&1 |> String.to_integer()))
       |> Enum.reverse()
       |> Enum.with_index(1)
       |> Enum.reduce(0, fn {x, i}, acc -> x * i + acc end)
       |> rem(11) == 0
+    end
+  end
+
+  defp convert_last(isbn) do
+    if List.last(isbn) == "X" do
+      List.replace_at(isbn, -1, "10")
     else
-      false
+      isbn
     end
   end
 end
