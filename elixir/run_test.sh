@@ -11,7 +11,7 @@ function run_test() {
 }
 
 function run_tests() {
-    directories=$(find elixir -type d)
+    directories=$(find "." -type d -not -path ".")
     for d in ${directories}; do
         run_test $d;
     done
