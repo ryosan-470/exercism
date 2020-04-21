@@ -12,11 +12,13 @@ jobs:
           otp-version: 22.2
           elixir-version: 1.10.2
       - run: |
-          directories=$(find "." -type d -not -path ".")
+          directories=$(find "." -type d -not -path "." -maxdepth 1)
           for d in ${directories}; do
             if [ -f ${d}/mix.exs ]; then
+              cd $d
               mix deps.get
               mix test
+              cd ..
             else
               elixir ${d}/*_test.exs
             fi
