@@ -1,0 +1,17 @@
+on: push
+
+jobs:
+  test-rust:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: "rust"
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          directories=$(find "." -type d -not -path "." -maxdepth 1)
+          for d in ${directories}; do
+            cd $d
+            cargo test -- --ignored
+            cd ..
+          done
+        working-directory: ${{env.working-directory}}
