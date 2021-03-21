@@ -1,3 +1,4 @@
+name: test-elixir
 on:
   push:
     paths:
