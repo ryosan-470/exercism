@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'elixir/**'
+      - '.github/workflows/test-elixir.yml'
 
 jobs:
   test-elixir:

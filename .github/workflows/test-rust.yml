@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'rust/**'
+      - '.github/workflows/test-rust.yml'
 
 jobs:
   test-rust:
