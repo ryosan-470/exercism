@@ -11,7 +11,7 @@ jobs:
     env:
       working-directory: "rust"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: |
           directories=$(find "." -type d -not -path "." -maxdepth 1)
           for d in ${directories}; do
