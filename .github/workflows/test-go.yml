@@ -3,16 +3,14 @@ on:
   push:
     paths:
       - 'go/**'
+      - '.github/workflows/test-go.yml'
 
 jobs:
   test-go:
     runs-on: ubuntu-latest
-    env:
-      working-directory: "go"
+    defaults:
+      run:
+        working-directory: go
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2
-        with:
-          go-version:  1.16.2
       - run: ./run_test.sh
-        working-directory: ${{env.working-direcrory}}
