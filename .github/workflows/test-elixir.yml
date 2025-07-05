@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'elixir/**'
+      - '.github/workflows/test-elixir.yml'
 
 jobs:
   test-elixir:
@@ -11,10 +12,10 @@ jobs:
       working-directory: "elixir"
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-elixir@v1
+      - uses: erlef/setup-beam@v1
         with:
-          otp-version: 22.2
-          elixir-version: 1.10.2
+          otp-version: 28
+          elixir-version: 1.18
       - run: |
           directories=$(find "." -type d -not -path "." -maxdepth 1)
           for d in ${directories}; do
